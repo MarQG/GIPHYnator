@@ -2,7 +2,7 @@ $("document").ready(function(){
 	var topics = [
 		"the walking dead",
 		"game of thrones",
-		"arrow",
+		"the arrow",
 		"rick and morty",
 		"the gifted",
 		"riverdale",
@@ -25,11 +25,14 @@ $("document").ready(function(){
 	function buildButtons(){
 		$("#topic-buttons").html("");
 		for(var i = 0; i < topics.length; i++){
+			var color = colorGenerator();
 			var topicBtn = $("<button>");
 			topicBtn.addClass("topic-btn");
 			topicBtn.attr({
 				"data-search": topics[i],
 			});
+			topicBtn.css("border", "1px solid "+color);
+
 			topicBtn.text(topics[i]);
 			$("#topic-buttons").append(topicBtn);
 		}
@@ -49,6 +52,7 @@ $("document").ready(function(){
 
 			topics.push(newTopic);
 
+			$("#topic-text").val("");
 			buildButtons();
 
 		});
@@ -57,6 +61,11 @@ $("document").ready(function(){
 	function queryBuilder(topic){
 		topic.replace(/ +/g, "+");
     	queryURL = "https://api.giphy.com/v1/gifs/search?q="+ topic +"&limit=10&rating=pg&api_key=" + apiKey;
+	}
+
+	function colorGenerator(){
+		var hsl= "hsla(" + Math.random()*360 + ", 100%, 70%, 1)";
+		return hsl 
 	}
 
     

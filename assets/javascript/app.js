@@ -60,7 +60,7 @@ $("document").ready(function(){
 
 	function queryBuilder(topic){
 		topic.replace(/ +/g, "+");
-    	queryURL = "https://api.giphy.com/v1/gifs/search?q="+ topic +"&limit=10&rating=pg&api_key=" + apiKey;
+    	queryURL = "https://api.giphy.com/v1/gifs/search?q="+ topic +"&limit=10&rating=g&api_key=" + apiKey;
 	}
 
 	function colorGenerator(){

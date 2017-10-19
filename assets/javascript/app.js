@@ -23,7 +23,7 @@ $("document").ready(function(){
 	var queryURL = "";
 
 	function buildButtons(){
-		$("#topic-buttons").html("");
+		$("#topic-buttons").empty();
 		for(var i = 0; i < topics.length; i++){
 			var color = colorGenerator();
 			var topicBtn = $("<button>");
@@ -38,7 +38,7 @@ $("document").ready(function(){
 		}
 
 		$(".topic-btn").on("click", function(){
-			$("#topics").html("");
+			$("#topics").empty();
 			queryBuilder($(this).attr("data-search"));
 			getImages();
 		});
@@ -48,7 +48,7 @@ $("document").ready(function(){
 		$("#topic-form").submit(function(e){
 			e.preventDefault();
 
-			var newTopic = $("#topic-text").val();
+			var newTopic = $("#topic-text").val().trim();
 
 			topics.push(newTopic);
 

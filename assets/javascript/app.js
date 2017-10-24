@@ -19,6 +19,9 @@ $("document").ready(function(){
 		"breaking bad",
 		"the office"
 	];
+
+	var gifToggle = false;
+
 	var apiKey = "bsbY1NNR6RLAQA6e7ZTrnfJCwcdwIJpV";
 	var queryURL = "";
 
@@ -42,6 +45,8 @@ $("document").ready(function(){
 			queryBuilder($(this).attr("data-search"));
 			getImages();
 		});
+
+
 	}
 	
 	function saveNewTopic(){
@@ -55,6 +60,30 @@ $("document").ready(function(){
 			$("#topic-text").val("");
 			buildButtons();
 
+		});
+	}
+
+	function playToggle(){
+
+		var playTogButton = $("<button>");
+		playTogButton.addClass("topic-btn play-toggle");
+		playTogButton.text("Play/Pause All");
+		
+		$("#topics").prepend(playTogButton);
+
+		$(".play-toggle").on("click", function(){
+
+			if(gifToggle){
+				$(".gifs").each(function(index, value){
+					$(this).attr("src", $(this).attr("data-run-img"));
+				});
+				gifToggle = false;
+			} else {
+				$(".gifs").each(function(index){
+					$(this).attr("src", $(this).attr("data-still"));
+				});
+				gifToggle = true;
+			}
 		});
 	}
 
@@ -74,7 +103,7 @@ $("document").ready(function(){
 	      url: queryURL,
 	      method: 'GET'
 	    }).done(function(response) {
-	      	console.log(response);
+	    	gifToggle = true;
 	      	for(var i = 0; i <response.data.length; i++){
 		      	var imgWrapper = $("<div>");
 		      	imgWrapper.addClass("gifwrapper");
@@ -90,14 +119,17 @@ $("document").ready(function(){
 		        imgWrapper.append(rating);
 		        imgWrapper.append(img)
 		        $("#topics").append(imgWrapper);
-		      }
 
-		      $(".gifs").on("click", function(){
-		        if($(this).attr("src") === $(this).attr("data-still")){
-		          $(this).attr("src", $(this).attr("data-run-img"));
-		        } else {
-		          $(this).attr("src", $(this).attr("data-still"));
-		        }
+			}
+
+			playToggle();
+
+			$(".gifs").on("click", function(){
+				if($(this).attr("src") === $(this).attr("data-still")){
+				  $(this).attr("src", $(this).attr("data-run-img"));
+				} else {
+				  $(this).attr("src", $(this).attr("data-still"));
+				}
 		    });
 	    });
 	}

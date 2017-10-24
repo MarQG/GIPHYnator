@@ -31,6 +31,10 @@ section{
 	margin: 20px 0;
 }
 
+#topic-buttons{
+	margin: 20px auto;
+}
+
 #topics{
 	float: left;
 	width: 70%;
@@ -67,6 +71,10 @@ section{
 
 .topic-btn:focus, .topic-btn:hover{
 	box-shadow: inset 0 0 0 2em hsla(32, 100%, 70%, 1);
+}
+
+.play-toggle{
+	border-color: hsla(32, 100%, 70%, 1);
 }
 
 form{
